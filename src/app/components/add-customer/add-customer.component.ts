@@ -24,7 +24,7 @@ export class AddCustomerComponent implements OnInit {
   customer: Customer = {};
   validationService: ValidationService;
 
-  submitted = false;
+  successMessage: string = "";
   ErrorList: string[] = [];
 
   constructor(private customerService: CustomerService, validationService: ValidationService) {
@@ -35,7 +35,6 @@ export class AddCustomerComponent implements OnInit {
   }
 
   saveCustomer(): void {
-
     let customer: Customer = {
       firstName: this.profileForm.controls['firstName'].value,
       lastName: this.profileForm.controls['lastName'].value,
@@ -46,47 +45,50 @@ export class AddCustomerComponent implements OnInit {
     };
 
     var validationResult = this.validationService.validateCustomerSync(customer);
-
     var isValid = validationResult.isValid();
 
     this.ErrorList = [];
+    this.successMessage = '';
+
+    // customer.firstName = "11111111111111111111111111111111";
+    // console.log(customer);
 
     if (isValid) {
       this.customerService.create(customer)
         .subscribe({
           next: (res) => {
-            this.profileForm.reset()
+            this.successMessage = "create customer successfuly";
+            this.profileForm.reset();
           },
-          error: (e) =>{
-            this.ErrorList.push(e.message)
+          error: (e) => {
+            this.ErrorList.push(e.error.title)
             console.error(e)
-          } 
+            this.getMessageFromError(e.error.errors).forEach(x => {
+              this.ErrorList.push(x)
+            });
+          }
         });
     }
     else {
       validationResult.getFailures().forEach(x => {
         this.ErrorList.push(x.message ?? '')
       })
-
     }
 
   }
 
-  newCustomer(): void {
-    this.submitted = false;
-
-    this.customer = {
-      firstName: "",
-      lastName: "",
-      city: "City",
-      email: "Email@sd.dd",
-      mobile: "989013039975",
-      postalCode: "12324"
-    };
-  }
-
   ngOnDestroy() {
 
+  }
+
+  getMessageFromError(object: any) {
+    let errors: string[] = [];
+    Object.keys(object).forEach(function (key, index) {
+      // key: the name of the object key
+      // index: the ordinal position of the key within the object 
+      errors.push(object[key])
+    });
+    return errors;
   }
 }
 
