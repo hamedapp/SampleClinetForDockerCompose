@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/models/customer.model';
-import { CustomerService } from 'src/app/services/customer.service';
+import { CustomerService } from 'src/app/services/api/customer.service';
 
 @Component({
   selector: 'app-tutorials-list',
@@ -57,14 +57,14 @@ export class CustomersListComponent implements OnInit {
     this.currentTutorial = {};
     this.currentIndex = -1;
 
-    this.customerService.findByTitle(this.title)
-      .subscribe({
-        next: (data) => {
-          this.customers = data;
-          console.log(data);
-        },
-        error: (e) => console.error(e)
-      });
+    // this.customerService.findByTitle(this.title)
+    //   .subscribe({
+    //     next: (data) => {
+    //       this.customers = data;
+    //       console.log(data);
+    //     },
+    //     error: (e) => console.error(e)
+    //   });
   }
 
 }

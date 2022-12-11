@@ -2,18 +2,15 @@
   <div class="col-md-8">
   </div>
   <div class="col-md-6">
-    <h4>customers List</h4>
+    <h4>Customers List</h4>
     <ul class="list-group">
-      <li
-        class="list-group-item"
-        *ngFor="let customer of customers; let i = index"
-        [class.active]="i == currentIndex"
+      <li class="list-group-item" *ngFor="let customer of customers; let i = index" [class.active]="i == currentIndex"
         (click)="setActiveTutorial(customer, i)">
         {{ customer.firstName }}
         <br>
         <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials(customer.id)">
-      Remove All
-    </button>
+          Remove
+        </button>
       </li>
     </ul>
   </div>

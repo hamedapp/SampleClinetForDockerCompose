@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Customer } from '../models/customer.model';
+import { Customer } from '../../models/customer.model';
 
 const baseUrl = 'http://localhost:17930/api/customer';
 
@@ -39,9 +39,5 @@ export class CustomerService {
 
   deleteAll(): Observable<any> {
     return this.http.delete(baseUrl);
-  }
-
-  findByTitle(title: any): Observable<Customer[]> {
-    return this.http.get<Customer[]>(`${baseUrl}?Id=${title}`);
   }
 }
