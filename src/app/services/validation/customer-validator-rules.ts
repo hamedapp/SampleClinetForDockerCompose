@@ -19,9 +19,9 @@ export class CustomerValidator extends AbstractValidator<Customer> {
 
         this.validateIfString(cu => cu.mobile)
             .isMobilePhoneNo("en-US")
-            .withFailureMessage("phone nuber is not valid.");
+            .withFailureMessage("phone number is not valid.");
 
-        this.validateIfString(cu => cu.postalCode).isEmpty()
+        this.validateIfString(cu => cu.postalCode)
             .isPostalCode("US")
             .withFailureMessage("postal code is required in valid format.");
 

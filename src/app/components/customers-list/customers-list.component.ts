@@ -33,16 +33,9 @@ export class CustomersListComponent implements OnInit {
 
   refreshList(): void {
     this.retrieveCustomers();
-    this.currentTutorial = {};
-    this.currentIndex = -1;
   }
 
-  setActiveTutorial(tutorial: Customer, index: number): void {
-    this.currentTutorial = tutorial;
-    this.currentIndex = index;
-  }
-
-  removeAllTutorials(id: number): void {
+  removeTutorials(id: number): void {
     this.customerService.delete(id)
       .subscribe({
         next: (res) => {
@@ -51,20 +44,6 @@ export class CustomersListComponent implements OnInit {
         },
         error: (e) => console.error(e)
       });
-  }
-
-  searchTitle(): void {
-    this.currentTutorial = {};
-    this.currentIndex = -1;
-
-    // this.customerService.findByTitle(this.title)
-    //   .subscribe({
-    //     next: (data) => {
-    //       this.customers = data;
-    //       console.log(data);
-    //     },
-    //     error: (e) => console.error(e)
-    //   });
   }
 
 }

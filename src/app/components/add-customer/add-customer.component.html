@@ -1,26 +1,15 @@
 <div>
   <div class="submit-form">
-    <!-- <div *ngIf="!submitted">
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input type="text" class="form-control" id="firstName" required [(ngModel)]="customer.firstName"
-          name="firstName" />
-      </div>
+    <div *ngIf="successMessage != ''" class="alert alert-success mt-2">
+      {{successMessage}}
+    </div>
 
-      <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input class="form-control" id="lastName" required [(ngModel)]="customer.lastName" name="lastName" />
-      </div>
-
-      <button (click)="saveCustomer()" class="btn btn-success">Submit</button>
-    </div> -->
-
-    <!-- <div *ngIf="submitted">
-      <h4>customer was submitted successfully!</h4>
-      <button class="btn btn-success" (click)="newCustomer()">Add</button>
-    </div> -->
+    <div *ngFor="let error of ErrorList" class="alert alert-danger mt-2" role="alert">
+      {{ error }}
+    </div>
 
     <form [formGroup]="profileForm">
+
       <div class="form-group">
         <label for="first-name">First Name: </label>
         <input class="form-control" id="first-name" type="text" formControlName="firstName">
@@ -30,28 +19,30 @@
         <label for="last-name">Last Name: </label>
         <input class="form-control" id="last-name" type="text" formControlName="lastName">
       </div>
+
       <div class="form-group">
         <label for="last-name">City: </label>
-        <input class="form-control" id="last-name" type="text" formControlName="city">
+        <input class="form-control" id="city" type="text" formControlName="city">
       </div>
+
       <div class="form-group">
         <label for="last-name">Email: </label>
-        <input class="form-control" id="last-name" type="text" formControlName="email">
+        <input class="form-control" id="email" type="text" formControlName="email">
       </div>
+
       <div class="form-group">
         <label for="last-name">Mobile: </label>
-        <input class="form-control" id="last-name" type="text" formControlName="mobile">
+        <input class="form-control" id="mobile" type="text" formControlName="mobile">
       </div>
+
       <div class="form-group">
         <label for="last-name">Postal Code: </label>
-        <input class="form-control" id="last-name" type="text" formControlName="postalCode">
+        <input class="form-control" id="postalcode" type="text" formControlName="postalCode">
       </div>
-      <button (click)="saveCustomer()" class="btn btn-success">Add Customer</button>
-    </form>
 
-    <div *ngFor="let error of ErrorList" class="alert alert-danger mt-2" role="alert">
-      {{ error }}
-    </div>
+      <button (click)="saveCustomer()" class="btn btn-success">Add Customer</button>
+
+    </form>
 
   </div>
 </div>
