@@ -7,8 +7,8 @@ import { AddCustomerComponent } from './components/add-customer/add-customer.com
 const routes: Routes = [
   { path: '', redirectTo: 'customers', pathMatch: 'full' },
   { path: 'customers', component: CustomerListComponent },
-  //{ path: 'customers/:id', component: CustomerDetailsComponent },
-  { path: 'add', component: AddCustomerComponent }
+  
+  { path: 'add', component: AddCustomerComponent },{ path: 'add/:id', component: AddCustomerComponent },
 ];
 
 @NgModule({

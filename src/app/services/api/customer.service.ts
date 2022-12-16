@@ -22,7 +22,7 @@ export class CustomerService {
   }
 
   get(id: any): Observable<Customer> {
-    return this.http.get(`${baseUrl}/${id}`);
+    return this.http.get(`${baseUrl}/get?id=${id}`);
   }
 
   create(data: any): Observable<any> {
@@ -30,7 +30,8 @@ export class CustomerService {
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, data);
+    data.id = id;
+    return this.http.post(`${baseUrl}/Update`, data);
   }
 
   delete(id: any): Observable<any> {
