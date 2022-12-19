@@ -1,4 +1,4 @@
-<div class="list row">
+<!-- <div class="list row">
 
   <div class="col-md-6">
     <div class="d-flex">
@@ -28,4 +28,11 @@
     </div>
 
   </div>
-</div>
+</div> -->
+
+
+<app-mat-custom-gird *ngIf="isDataLoaded"
+ (action)="onTableAction($event)"
+  [dataset]="customers" 
+  [columns]="columns">
+</app-mat-custom-gird>
