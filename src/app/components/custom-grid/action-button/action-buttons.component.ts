@@ -21,11 +21,8 @@ export class ActionButtonsComponent implements OnInit {
       value: this.value,
     })
   }
+  
   onDeleteClick() {
     this.buttonAction.emit({ name: TableConsts.actionButton.delete })
   }
-  onViewClick() {
-    this.buttonAction.emit({ name: TableConsts.actionButton.view })
-  }
-
 }

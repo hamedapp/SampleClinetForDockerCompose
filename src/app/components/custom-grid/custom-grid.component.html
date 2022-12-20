@@ -41,7 +41,6 @@
   <ng-container matColumnDef="action">
     <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
     <mat-cell *matCellDef="let element" action-buttons [value]="element" (buttonAction)="onTableAction($event, element)">
-      {{ element.weight }}
     </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

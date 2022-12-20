@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { TableButtonAction } from 'src/app/models/custom-grid.model';
 import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/api/customer.service';
 
@@ -9,30 +10,28 @@ import { CustomerService } from 'src/app/services/api/customer.service';
   templateUrl: './customers-list.component.html',
   styleUrls: ['./customers-list.component.css']
 })
-export class CustomersListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CustomersListComponent implements OnInit, OnDestroy {
 
   customers: Customer[] = [];
   columns = [
     { columnDef: 'firstName', header: 'Fisrt Name' },
     { columnDef: 'lastName', header: 'Last Name' },
     { columnDef: 'city', header: 'City' },
+    { columnDef: 'mobile', header: 'Phone Number' },
+    { columnDef: 'email', header: 'Email' },
   ]
 
   currentTutorial: Customer = {};
-  title = '';
+  title: string = '';
   customerServiceSub: Subscription = new Subscription;
   isDataLoaded: boolean = false;
 
   private router: Router;
 
-  constructor(private customerService: CustomerService, r: Router) {
-    this.router = r;
+  constructor(private customerService: CustomerService, router: Router) {
+    this.router = router;
   }
-  ngAfterViewInit(): void {
-    // this.retrieveCustomers();
-    // console.log(this.customers)
-  }
-
+ 
   ngOnDestroy(): void {
     this.customerServiceSub.unsubscribe;
   }
@@ -66,6 +65,7 @@ export class CustomersListComponent implements OnInit, OnDestroy, AfterViewInit 
         error: (e) => console.error(e)
       });
   }
+
   add() {
     this.router.navigate(['/add']);
   }
@@ -74,7 +74,8 @@ export class CustomersListComponent implements OnInit, OnDestroy, AfterViewInit 
     this.router.navigate(['/add'], { queryParams: { id: id } });
   }
 
-  onTableAction(event: any) {
+  onTableAction(event: TableButtonAction) {
+
     if (event.name == "delete") {
       this.remove(event.value.id);
       this.refreshList();
