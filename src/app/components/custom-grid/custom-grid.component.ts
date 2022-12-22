@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +13,7 @@ import { TableColumn, TableButtonAction } from '../../models/custom-grid.model';
   templateUrl: './custom-grid.component.html',
   styleUrls: ['./custom-grid.component.css'],
 })
-export class CustomGridComponent implements OnInit {
+export class CustomGridComponent implements OnInit, OnChanges {
 
   @ViewChild(MatPaginator, { static: true }) paginator?: MatPaginator;
   @Output() action: EventEmitter<TableButtonAction> = new EventEmitter<TableButtonAction>()
@@ -28,6 +28,9 @@ export class CustomGridComponent implements OnInit {
   private router: Router;
 
   constructor( r: Router) { this.router = r;}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.dataSource = new MatTableDataSource<Customer>(this.dataset);
+  }
 
   ngOnInit() {
     // set checkbox column
@@ -38,11 +41,12 @@ export class CustomGridComponent implements OnInit {
 
     // add action column
     this.displayedColumns.push("action");
-    this.dataSource = new MatTableDataSource<Customer>(this.dataset);
+    
 
     // set pagination
     this.dataSource.paginator = this.paginator ?? null;
   }
+ 
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;

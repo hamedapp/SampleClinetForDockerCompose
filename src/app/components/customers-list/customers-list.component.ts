@@ -6,13 +6,14 @@ import { Customer } from 'src/app/models/customer.model';
 import { CustomerService } from 'src/app/services/api/customer.service';
 
 @Component({
-  selector: 'app-tutorials-list',
+  selector: 'app-customers-list',
   templateUrl: './customers-list.component.html',
   styleUrls: ['./customers-list.component.css']
 })
 export class CustomersListComponent implements OnInit, OnDestroy {
 
   customers: Customer[] = [];
+
   columns = [
     { columnDef: 'firstName', header: 'Fisrt Name' },
     { columnDef: 'lastName', header: 'Last Name' },
@@ -22,8 +23,9 @@ export class CustomersListComponent implements OnInit, OnDestroy {
   ]
 
   currentTutorial: Customer = {};
-  title: string = '';
+
   customerServiceSub: Subscription = new Subscription;
+
   isDataLoaded: boolean = false;
 
   private router: Router;
@@ -64,10 +66,6 @@ export class CustomersListComponent implements OnInit, OnDestroy {
         },
         error: (e) => console.error(e)
       });
-  }
-
-  add() {
-    this.router.navigate(['/add']);
   }
 
   update(id: number) {

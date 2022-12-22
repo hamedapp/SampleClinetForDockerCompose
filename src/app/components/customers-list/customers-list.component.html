@@ -1,35 +1,3 @@
-<!-- <div class="list row">
-
-  <div class="col-md-6">
-    <div class="d-flex">
-      <div class="m-2 col-8">
-        <h4>Customers List</h4>
-      </div>
-
-      <div class="m-3 col-4" style="font-size: 2rem;" (click)="add()">
-        <i class="bi bi-plus-square"></i>
-      </div>
-    </div>
-
-
-    <div>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let customer of customers; let i = index">
-          {{ customer.firstName }} {{ customer.id }}
-          <br>
-          <button class="m-3 btn btn-sm btn-danger" (click)="remove(customer.id)">
-            Remove
-          </button>
-          <button class="m-3 btn btn-sm btn-danger" (click)="update(customer.id)">
-            update
-          </button>
-        </li>
-      </ul>
-    </div>
-
-  </div>
-</div> -->
-
 
 <app-mat-custom-gird *ngIf="isDataLoaded"
  (action)="onTableAction($event)"
